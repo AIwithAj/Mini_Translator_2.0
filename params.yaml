@@ -1,0 +1,22 @@
+lang1: en
+lang2: it
+
+seq_len: 350
+lower: True
+batch_size: 8
+
+
+
+encoder_embedding_dim: 256
+decoder_embedding_dim: 256
+hidden_dim: 512
+n_layers: 2
+encoder_dropout: 0.5
+decoder_dropout: 0.5
+
+
+num_epochs: 1
+lr: 10**-4
+d_model: 512 # Dimensions of the embeddings in the Transformer. 512 like in the "Attention Is All You Need" paper.
+preload: None
+experiment_name': 'runs/tmodel'
