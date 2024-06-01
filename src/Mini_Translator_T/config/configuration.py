@@ -1,7 +1,7 @@
 from src.Mini_Translator_T.constants import *
 from src.Mini_Translator_T.utils.common import read_yaml,create_directories
-from src.Mini_Translator_T.entity import (DataIngestionConfig,DataValidationConfig,
-                                          DataTransformationConfig)
+from src.Mini_Translator_T.entity import (DataIngestionConfig,DataValidationConfig,model_trainer_config,
+                                          DataTransformationConfig,model_eval_config)
 
 
 class ConfigurationManager:
@@ -67,4 +67,28 @@ class ConfigurationManager:
         )
 
         return data_transformation_config
+    
+
+    def get_train_model_config(self) -> model_trainer_config:
+        config = self.config.model_trainer
+        params=self.params
+
+        create_directories([config.root_dir])
+
+        trainer_config=model_trainer_config(root_dir=config.root_dir,seq_len=params.seq_len,num_epochs=params.num_epochs,
+                                            model_folder=config.model_folder,model_basename=config.model_basename,
+                                            experiment_name=config.experiment_name,lr=params.lr,d_model=params.d_model,preload=None)
+        
+        return trainer_config
+    
+        
+    def get_eval_model_config(self) -> model_eval_config:
+        config = self.config.model_evaluation
+        params=self.params
+
+        create_directories([config.root_dir])
+
+        eval_config=model_eval_config(root_dir=config.root_dir)
+        
+        return eval_config
         

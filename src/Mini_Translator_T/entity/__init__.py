@@ -33,3 +33,27 @@ class DataTransformationConfig:
     seq_len : int
     data_loader:Path
     batch_size: int
+
+
+
+@dataclass(frozen=True)
+class model_trainer_config:
+    root_dir: Path
+    seq_len:int
+    num_epochs: int
+    model_folder: str
+    model_basename:str
+    preload: None
+    experiment_name: str
+    lr:float
+    d_model:int
+
+    
+    
+
+@dataclass(frozen=True)
+class model_eval_config:
+    root_dir: Path
+
+
+
