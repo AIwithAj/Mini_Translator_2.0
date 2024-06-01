@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 artifact
+Readme.md
 .vscode
 # C extensions
 *.so
