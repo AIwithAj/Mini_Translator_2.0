@@ -5,8 +5,7 @@ from Mini_Translator.logging import logger
 from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
-from typing import Any
-
+import torch
 
 
 @ensure_annotations
@@ -49,6 +48,10 @@ def create_directories(path_to_directories: list, verbose=True):
             logger.info(f"created directory at: {path}")
 
 
+def casual_mask(size):
+        # Creating a square matrix of dimensions 'size x size' filled with ones
+        mask = torch.triu(torch.ones(1, size, size), diagonal = 1).type(torch.int)
+        return mask == 0
 
 @ensure_annotations
 def get_size(path: Path) -> str:

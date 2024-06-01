@@ -1,6 +1,7 @@
 from src.Mini_Translator_T.constants import *
 from src.Mini_Translator_T.utils.common import read_yaml,create_directories
-from src.Mini_Translator_T.entity import DataIngestionConfig,DataValidationConfig
+from src.Mini_Translator_T.entity import (DataIngestionConfig,DataValidationConfig,
+                                          DataTransformationConfig)
 
 
 class ConfigurationManager:
@@ -47,4 +48,23 @@ class ConfigurationManager:
 
         return data_validation_config
         
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+        params=self.params
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            tokenizer_file=config.tokenizer_file,
+            lang1=params.lang1,
+            lang2=params.lang2,
+            seq_len=params.seq_len,
+            data_loader=config.data_loader,
+            batch_size=params.batch_size
+        )
+
+        return data_transformation_config
         
