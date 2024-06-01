@@ -1,0 +1,40 @@
+stages:
+  stage_01_data_ingestion:
+    cmd: python src/Mini_Translator_T/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/Mini_Translator_T/pipeline/stage_01_data_ingestion.py
+    outs:
+      - data/processed/data_ingestion_output.csv
+
+  stage_02_data_validation:
+    cmd: python src/Mini_Translator_T/pipeline/stage_02_data_validation.py
+    deps:
+      - src/Mini_Translator_T/pipeline/stage_02_data_validation.py
+      - data/processed/data_ingestion_output.csv
+    outs:
+      - data/processed/data_validation_output.csv
+
+  stage_03_data_transformation:
+    cmd: python src/Mini_Translator_T/pipeline/stage_03_data_transformation.py
+    deps:
+      - src/Mini_Translator_T/pipeline/stage_03_data_transformation.py
+      - data/processed/data_validation_output.csv
+    outs:
+      - artifacts/data_transformation/
+
+  stage_04_model_trainer:
+    cmd: python src/Mini_Translator_T/pipeline/stage_04_model_trainer.py
+    deps:
+      - src/Mini_Translator_T/pipeline/stage_04_model_trainer.py
+      - artifacts/data_transformation/
+    outs:
+      - artifacts/trained_model/
+
+  stage_06_model_evaluation:
+    cmd: python src/Mini_Translator_T/pipeline/stage_06_model_evaluation.py
+    deps:
+      - src/Mini_Translator_T/pipeline/stage_06_model_evaluation.py
+      - artifacts/trained_model/
+    outs:
+      - artifacts/model_evaluation/
+
